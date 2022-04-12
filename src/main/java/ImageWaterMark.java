@@ -89,8 +89,6 @@ public class ImageWaterMark {
         // 旋转图片
         g.rotate(Math.toRadians(angle + waterMarkAngle), (double) srcImgWidth / 2, (double) srcImgHeight / 2);
         // 计算字体大小
-
-
         Font font;
         // 设置字体颜色
         g.setColor(Color.lightGray);
