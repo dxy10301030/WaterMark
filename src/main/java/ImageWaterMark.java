@@ -22,7 +22,6 @@ public class ImageWaterMark {
      * @param fontWatermarks
      * @return: void
      * @throws:
-     * @变更记录: 2022-03-08 下午04:21:22 丁县迎创建
      */
     public static byte[] setWaterMarkByPath(String filepath, String... fontWatermarks) throws IOException {
         // 读取原图片信息
@@ -41,7 +40,6 @@ public class ImageWaterMark {
      * @param fontWatermarks
      * @return: java.lang.String
      * @throws:
-     * @变更记录: 2022-03-08 下午05:12:34 丁县迎创建
      */
     public static byte[] setWaterMarkByByte(byte[] b, String... fontWatermarks) throws IOException {
         if (b == null || b.length == 0 || fontWatermarks == null || fontWatermarks.length == 0) {
@@ -60,7 +58,6 @@ public class ImageWaterMark {
      * @param fontWatermarks
      * @return: java.lang.String
      * @throws:
-     * @变更记录: 2022-03-08 下午05:13:04 丁县迎创建
      */
     public static byte[] setWaterMarkByImage(Image srcImg, String... fontWatermarks) throws IOException {
         if (srcImg == null || fontWatermarks == null || fontWatermarks.length == 0) {
