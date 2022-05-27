@@ -11,7 +11,7 @@ import java.util.Map;
 public class PDFKeywordLocation extends PDFTextStripper {
 
     // 关键字
-    private String key;
+    private String keyword;
     // PDF文件路径
     private String pdfPath;
     // 坐标信息集合
@@ -20,11 +20,11 @@ public class PDFKeywordLocation extends PDFTextStripper {
     private List<Map<String,Float>> pageList = new ArrayList<Map<String,Float>>();
 
     // 有参构造方法
-    public PDFKeywordLocation(String keywords, String pdfPath) throws IOException {
+    public PDFKeywordLocation(String keyword, String pdfPath) throws IOException {
         super();
         super.setSortByPosition(true);
         this.pdfPath = pdfPath;
-        this.key = keywords;
+        this.keyword = keyword;
     }
 
     public List<Map<String, Float>> getKeyWordLocation() throws IOException {
@@ -65,13 +65,13 @@ public class PDFKeywordLocation extends PDFTextStripper {
     // 获取坐标信息
     @Override
     protected void writeString(String string, List<TextPosition> textPositions) {
-        int length = key.length();
-        int index = string.indexOf(key);
+        int length = keyword.length();
+        int index = string.indexOf(keyword);
         if (index != -1) {
             int middle = index + length / 2;
             TextPosition textPosition = textPositions.get(middle);
             Map<String,Float> map = new HashMap<String, Float>();
-            map.put("x",textPosition.getTextMatrix().getTranslateX());
+            map.put("x",textPosition.getTextMatrix().getTranslateX() + (textPosition.getWidth() / 2));
             map.put("y",textPosition.getTextMatrix().getTranslateY() + (textPosition.getHeight() / 2) * 0.865f);
             pageList.add(map);
         }
