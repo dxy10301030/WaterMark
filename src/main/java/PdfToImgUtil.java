@@ -3,10 +3,12 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.apache.pdfbox.rendering.PDFRenderer;
+import org.apache.pdfbox.text.PDFTextStripper;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,7 +86,7 @@ public class PdfToImgUtil {
 				if (bytes == null) {
 					continue;
 				}
-				PDImageXObject pdImage = PDImageXObject.createFromByteArray(pdDocument, bytes, "waterMark");
+				PDImageXObject pdImage = PDImageXObject.createFromByteArray(pdDocument, bytes, "png");
 				stream.drawImage(pdImage, 0, 0, pageWidth, pageHeight);
 				stream.close();
 				pdDocument.save(os);
@@ -119,4 +121,27 @@ public class PdfToImgUtil {
 		}
 		return WaterMarkImages;
 	}
+
+	/**
+	 * 读取pdf文件内容
+	 * @param filename
+	 * @return
+	 */
+	public static String ParseToTxtStringUsingPDFBox(String filename)
+	{
+		try
+		{
+			PDDocument document = null;
+			//java.io.File file = new java.io.File(filename);
+			document = PDDocument.load(new File(filename));
+
+			PDFTextStripper stripper = new PDFTextStripper();
+			return(stripper.getText(document));
+		}
+		catch (IOException e1)
+		{
+			return(e1.getMessage());
+		}
+	}
+
 }
